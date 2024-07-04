@@ -8,11 +8,7 @@ class Usuario extends Conexion
         $sql = "SELECT * FROM usuario WHERE usuario = '$usuario'";
         $resultado = $this->conectar()->query($sql);
         $this->desconectar();
-        if ($resultado->num_rows > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return $resultado->num_rows > 0;
     }
 
     public function verificarContraseña($usuario, $contraseña)
@@ -20,11 +16,7 @@ class Usuario extends Conexion
         $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' AND contraseña = '$contraseña'";
         $resultado = $this->conectar()->query($sql);
         $this->desconectar();
-        if ($resultado->num_rows > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return $resultado->num_rows > 0;
     }
 
     public function verificarEstadoUsuario($usuario)
@@ -45,5 +37,30 @@ class Usuario extends Conexion
         $this->desconectar();
         $fila = $resultado->fetch_assoc();
         return $fila['rol'];
+    }
+
+    public function obtenerPreguntaSeguridad($usuario)
+    {
+        $sql = "SELECT p.pregunta FROM usuario u JOIN pregunta p ON u.idpregunta = p.idpregunta WHERE usuario = '$usuario'";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        $fila = $resultado->fetch_assoc();
+        return $fila['pregunta'];
+    }
+
+    public function verificarRespuesta($usuario, $respuesta)
+    {
+        $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' AND respuesta = '$respuesta'";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado->num_rows > 0;
+    }
+
+    public function cambiarContraseña($usuario, $contraseña)
+    {
+        $sql = "UPDATE usuario SET contraseña = '$contraseña' WHERE usuario = '$usuario'";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
     }
 }

@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (isset($_SESSION['usuario'])) {
-    session_destroy(); 
+if (!isset($_SESSION['usuario'])) {
+    header('Location: ../../index.php');
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -11,45 +12,12 @@ if (isset($_SESSION['usuario'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 200px;
-            margin: 0 auto;
-        }
-
-        label {
-            margin-top: 10px;
-        }
-
-        input {
-            margin-top: 5px;
-        }
-
-        button {
-            margin-top: 10px;
-            padding: 5px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
-    <h1>Restablecimiento de contraseña</h1>
+    <p>Responda la siguiente pregunta de seguridad para <?php echo $_SESSION['usuario']; ?>.<br><?php echo $_SESSION['pregunta']; ?></p>
     <form>
-        <label for="txtUsuario">Ingresa tu usuario</label>
-        <input type="text" id="txtUsuario">
+        <input type="text" id="txtRespuesta">
         <button type="button" id="btnAceptar" value="Aceptar" onclick="javascript:enviarForm()">Aceptar</button>
     </form>
     <a href="../../index.php">Volver al inicio</a>
@@ -57,14 +25,14 @@ if (isset($_SESSION['usuario'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function enviarForm() {
-            var txtUsuario = document.getElementById('txtUsuario').value;
-            var btnAceptar = document.getElementById('btnAceptar').value;
+            var respuesta = document.getElementById('txtRespuesta').value;
+            var aceptar = document.getElementById('btnAceptar').value;
             $.ajax({
                 type: "POST",
-                url: "validacionFormRestablecimientoContraseña.php",
+                url: "validacionFormPreguntaSeguridad.php",
                 data: {
-                    txtUsuario: txtUsuario,
-                    btnAceptar: btnAceptar
+                    txtRespuesta: respuesta,
+                    btnAceptar: aceptar
                 },
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 success: function(response) {
