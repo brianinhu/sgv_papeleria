@@ -1,55 +1,24 @@
 <?php
 session_start();
-if (isset($_SESSION['usuario'])) {
-    session_destroy(); 
+if (!isset($_SESSION['usuario'])) {
+    header('Location: ../../index.php');
+    exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 200px;
-            margin: 0 auto;
-        }
-
-        label {
-            margin-top: 10px;
-        }
-
-        input {
-            margin-top: 5px;
-        }
-
-        button {
-            margin-top: 10px;
-            padding: 5px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
-
 <body>
-    <h1>Restablecimiento de contraseña</h1>
+      <h1>Cambio de contraseña</h1>
     <form>
-        <label for="txtUsuario">Ingresa tu usuario</label>
-        <input type="text" id="txtUsuario">
+        <label for="txtNuevaContraseña">Ingresa tu nueva contraseña</label>
+        <input type="password" id="txtNuevaContraseña">
+        <label for="txtNuevaContraseñaRep">Confirma tu nueva contraseña</label>
+        <input type="password" id="txtNuevaContraseñaRep">
         <button type="button" id="btnAceptar" value="Aceptar" onclick="javascript:enviarForm()">Aceptar</button>
     </form>
     <a href="../../index.php">Volver al inicio</a>
@@ -57,14 +26,16 @@ if (isset($_SESSION['usuario'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function enviarForm() {
-            var txtUsuario = document.getElementById('txtUsuario').value;
-            var btnAceptar = document.getElementById('btnAceptar').value;
+            var txtNuevaContraseña = document.getElementById('txtNuevaContraseña').value;
+            var txtNuevaContraseñaRep = document.getElementById('txtNuevaContraseñaRep').value;
+            var aceptar = document.getElementById('btnAceptar').value;
             $.ajax({
                 type: "POST",
-                url: "validacionFormRestablecimientoContraseña.php",
+                url: "validacionFormNuevaContraseña.php",
                 data: {
-                    txtUsuario: txtUsuario,
-                    btnAceptar: btnAceptar
+                    txtNuevaContraseña: txtNuevaContraseña,
+                    txtNuevaContraseñaRep: txtNuevaContraseñaRep,
+                    btnAceptar: aceptar
                 },
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 success: function(response) {
@@ -74,7 +45,7 @@ if (isset($_SESSION['usuario'])) {
                             title: 'Éxito',
                             text: response['message'],
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 3000
                         }).then(function() {
                             window.location.href = response['redirect'];
                         });
@@ -90,5 +61,4 @@ if (isset($_SESSION['usuario'])) {
         }
     </script>
 </body>
-
 </html>
