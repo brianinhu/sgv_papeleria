@@ -63,4 +63,12 @@ class Usuario extends Conexion
         $this->desconectar();
         return $resultado;
     }
+
+    public function obtenerUsuarios()
+    {
+        $sql = "SELECT * FROM usuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
 }
