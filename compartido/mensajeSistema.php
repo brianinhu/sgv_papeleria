@@ -10,7 +10,7 @@ class MensajeSistema
                 <p><?php echo $mensaje; ?></p>
             </div>
             <div>
-                <a href="../../index.php">Volver</a>
+                <a href="../index.php">Volver</a>
             </div>
         </div>
 <?php
