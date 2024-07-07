@@ -54,8 +54,8 @@ class PanelPrincipalUsuario
                                 <img src="<?php echo $privilegio['icono']; ?>" alt="<?php echo basename($privilegio['icono']); ?>">
                             </td>
                             <td>
-                                <form method="post" action="../validacionPanelPrincipal.php">
-                                    <button type="submit" name="btnPrivilegio" value="<?php echo $privilegio['name']; ?>"><?php echo $privilegio['label'] ?></button>
+                                <form method="post" action="<?php echo $privilegio['ruta']; ?>">
+                                    <button type="submit" name="<?php echo $privilegio['name']; ?>" value="<?php echo $privilegio['name']; ?>"><?php echo $privilegio['label'] ?></button>
                                 </form>
                             </td>
                         </tr>

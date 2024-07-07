@@ -62,6 +62,8 @@ class PanelGestionUsuarios
                 <?php
                 }
                 ?>
+            </table>
+            <a href="../../moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php">Volver al menu principal</a>
         </body>
 
         </html>
