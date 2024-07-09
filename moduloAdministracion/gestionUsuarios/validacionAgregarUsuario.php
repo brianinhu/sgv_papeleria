@@ -10,8 +10,8 @@ if ($controller->validarSesion()) {
         $txtAPaterno = $_POST['txtAPaterno'];
         $txtAMaterno = $_POST['txtAMaterno'];
         $txtDNI = $_POST['txtDNI'];
-        $txtContraseña = $_POST['txtContraseña'];
-        $txtConfContraseña = $_POST['txtConfContraseña'];
+        $txtEditNuevaContraseña = $_POST['txtContraseña'];
+        $txtEditConfNuevaContraseña = $_POST['txtConfContraseña'];
         $txtUsuario = $_POST['txtUsuario'];
         $cbxRol = $_POST['cbxRol'];
         $cbxEstado = $_POST['cbxEstado'];
@@ -21,15 +21,15 @@ if ($controller->validarSesion()) {
         if ($controller->validarTextoNombreApellidos($txtNombre, $txtAPaterno, $txtAMaterno)) {
             if ($controller->validarTextoDNI($txtDNI)) {
                 if ($controller->validarDNI($txtDNI)) {
-                    if ($controller->validarTextoContraseña($txtContraseña)) {
-                        if ($controller->validarTextoIgualdadContraseñayConfContraseña($txtContraseña, $txtConfContraseña)) {
+                    if ($controller->validarTextoContraseña($txtEditNuevaContraseña)) {
+                        if ($controller->validarTextoIgualdadContraseñayConfContraseña($txtEditNuevaContraseña, $txtEditConfNuevaContraseña)) {
                             if ($controller->validarTextoUsuario($txtUsuario)) {
                                 if ($controller->validarUsuario($txtUsuario)) {
                                     if ($controller->validarSeleccionRol($cbxRol)) {
                                         if ($controller->validarSeleccionEstado($cbxEstado)) {
                                             if ($controller->validarSeleccionPreguntaSeguridad($cbxPreguntaSeguridad)) {
                                                 if ($controller->validarTextoRespuestaSecreta($txtRespuestaSecreta)) {
-                                                    if ($controller->agregarUsuario($txtNombre, $txtAPaterno, $txtAMaterno, $txtDNI, $txtContraseña, $txtUsuario, $cbxRol, $cbxEstado, $cbxPreguntaSeguridad, $txtRespuestaSecreta)) {
+                                                    if ($controller->agregarUsuario($txtNombre, $txtAPaterno, $txtAMaterno, $txtDNI, $txtEditNuevaContraseña, $txtUsuario, $cbxRol, $cbxEstado, $cbxPreguntaSeguridad, $txtRespuestaSecreta)) {
                                                         $response['flag'] = 1;
                                                         $response['title'] = $controller->title;
                                                         $response['message'] = $controller->message;

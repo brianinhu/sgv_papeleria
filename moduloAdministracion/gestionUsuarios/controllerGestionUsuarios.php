@@ -106,7 +106,7 @@ class ControllerGestionUsuarios
     public function validarTextoUsuario($usuario) {
         if (empty($usuario)) {
             $this->title = "Error";
-            $this->message = "El campo del usuario está vacío. Por favor, cree un usuario";
+            $this->message = "Por favor, complete el campo de usuario.";
             return false;
         } else if (strlen($usuario) < 5) {
             $this->title = "Error";
@@ -114,7 +114,7 @@ class ControllerGestionUsuarios
             return false;
         } else if (!preg_match("/^[a-zA-Z0-9]*$/", $usuario)) {
             $this->title = "Error";
-            $this->message = "El campo del usuario solo puede contener caracteres alfabéticos y numéricos.";
+            $this->message = "El usuario solo puede contener caracteres alfabéticos y numéricos.";
             return false;
         }
         return true;
@@ -184,6 +184,85 @@ class ControllerGestionUsuarios
         } else {
             $this->title = "Error";
             $this->message = "Error al registrar el usuario. Intente nuevamente.";
+            return false;
+        }
+    }
+
+    public function validarVacioTxtEditContraseña($contraseña) {
+        if (empty($contraseña)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function validarSeleccionCbxEditPreguntaSeguridad($cbxEditPreguntaSeguridad, $idpregunta) {
+        if ($cbxEditPreguntaSeguridad == $idpregunta) {
+            return false;
+        }
+        return true;
+    }
+
+    public function editarUsuario($idusuario, $txtEditNuevaContraseña, $txtEditUsuario, $cbxEditRol, $cbxEditEstado, $cbxEditPreguntaSeguridad, $txtEditRespuestaSecreta) {
+        $objUsuario = new Usuario();
+        if ($objUsuario->editarUsuario($idusuario, $txtEditNuevaContraseña, $txtEditUsuario, $cbxEditRol, $cbxEditEstado, $cbxEditPreguntaSeguridad, $txtEditRespuestaSecreta)) {
+            $this->title = "Éxito";
+            $this->message = "Usuario editado correctamente. Será redirigido al panel de gestión de usuarios en 3 segundos.";
+            return true;
+        } else {
+            $this->title = "Error";
+            $this->message = "Error al editar el usuario. Intente nuevamente.";
+            return false;
+        }
+    }
+
+    public function editarUsuarioMenosContraseña($idusuario, $txtEditUsuario, $cbxEditRol, $cbxEditEstado, $cbxEditPreguntaSeguridad, $txtEditRespuestaSecreta) {
+        $objUsuario = new Usuario();
+        if ($objUsuario->editarUsuarioMenosContraseña($idusuario, $txtEditUsuario, $cbxEditRol, $cbxEditEstado, $cbxEditPreguntaSeguridad, $txtEditRespuestaSecreta)) {
+            $this->title = "Éxito";
+            $this->message = "Usuario editado correctamente. Será redirigido al panel de gestión de usuarios en 3 segundos.";
+            return true;
+        } else {
+            $this->title = "Error";
+            $this->message = "Error al editar el usuario. Intente nuevamente.";
+            return false;
+        }
+    }
+
+    public function editarUsuarioMenosPreguntaSeguridad($idusuario, $txtEditNuevaContraseña, $txtEditUsuario, $cbxEditRol, $cbxEditEstado) {
+        $objUsuario = new Usuario();
+        if ($objUsuario->editarUsuarioMenosPreguntaSeguridad($idusuario, $txtEditNuevaContraseña, $txtEditUsuario, $cbxEditRol, $cbxEditEstado)) {
+            $this->title = "Éxito";
+            $this->message = "Usuario editado correctamente. Será redirigido al panel de gestión de usuarios en 3 segundos.";
+            return true;
+        } else {
+            $this->title = "Error";
+            $this->message = "Error al editar el usuario. Intente nuevamente.";
+            return false;
+        }
+    }
+
+    public function editarUsuarioMenosContraseñaMenosPreguntaSeguridad($idusuario, $txtEditUsuario, $cbxEditRol, $cbxEditEstado) {
+        $objUsuario = new Usuario();
+        if ($objUsuario->editarUsuarioMenosContraseñaMenosPreguntaSeguridad($idusuario, $txtEditUsuario, $cbxEditRol, $cbxEditEstado)) {
+            $this->title = "Éxito";
+            $this->message = "Usuario editado correctamente. Será redirigido al panel de gestión de usuarios en 3 segundos.";
+            return true;
+        } else {
+            $this->title = "Error";
+            $this->message = "Error al editar el usuario. Intente nuevamente.";
+            return false;
+        }
+    }
+
+    public function eliminarUsuario($idusuario) {
+        $objUsuario = new Usuario();
+        if ($objUsuario->eliminarUsuario($idusuario)) {
+            $this->title = "Éxito";
+            $this->message = "Usuario eliminado correctamente. Será redirigido al panel de gestión de usuarios en 3 segundos.";
+            return true;
+        } else {
+            $this->title = "Error";
+            $this->message = "Error al eliminar el usuario. Intente nuevamente.";
             return false;
         }
     }

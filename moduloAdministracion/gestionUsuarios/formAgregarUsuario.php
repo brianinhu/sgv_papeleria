@@ -34,7 +34,7 @@ class FormAgregarUsuario
 
         <body>
             <h1>Agregar usuario</h1>
-            <form id="formAgregar" action="validacionAgregarUsuario.php" method="post">
+            <form id="formAgregar">
                 <div>
                     <label for="txtNombre">Nombre:</label>
                     <input type="text" id="txtNombre" name="txtNombre">

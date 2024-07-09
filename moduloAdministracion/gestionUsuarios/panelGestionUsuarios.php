@@ -89,9 +89,9 @@ class PanelGestionUsuarios
                                     <input type="hidden" name="idusuario" value="<?php echo $usuario["idusuario"]; ?>">
                                     <button type="submit" name="btnEditarUsuario" value="Editar">Editar</button>
                                 </form>
-                                <form method="POST" action="">
+                                <form method="POST" action="validacionPostPanelGestionUsuarios.php">
                                     <input type="hidden" name="idusuario" value="<?php echo $usuario["idusuario"]; ?>">
-                                    <button type="submit" name="btnEliminarUsuario" value="Eliminar" onclick="javascript:eliminarUsuario()">Eliminar</button>
+                                    <button type="submit" name="btnEliminarUsuario" value="Eliminar">Eliminar</button>
                                 </form>
                             </td>
                         </tr>
@@ -103,6 +103,7 @@ class PanelGestionUsuarios
             <form method="POST" action="validacionPostPanelGestionUsuarios.php">
                 <button type="submit" name="btnAgregarUsuario" value="Agregar">Agregar usuario</button>
             </form>
+
             <a href="../../moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php">Volver al menu principal</a>
 
             <!-- JavaScript JQuery -->

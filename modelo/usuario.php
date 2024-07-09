@@ -96,4 +96,44 @@ class Usuario extends Conexion
         $this->desconectar();
         return $resultado;
     }
+
+    public function editarUsuario($idusuario, $txtEditNuevaContraseña, $txtEditUsuario, $cbxEditRol, $cbxEditEstado, $cbxEditPreguntaSeguridad, $txtEditRespuestaSecreta)
+    {
+        $sql = "UPDATE usuario SET contraseña = '$txtEditNuevaContraseña', usuario = '$txtEditUsuario', idrol = $cbxEditRol, estado = $cbxEditEstado, idpregunta = $cbxEditPreguntaSeguridad, respuesta = '$txtEditRespuestaSecreta' WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
+
+    public function editarUsuarioMenosContraseña($idusuario, $txtEditUsuario, $cbxEditRol, $cbxEditEstado, $cbxEditPreguntaSeguridad, $txtEditRespuestaSecreta)
+    {
+        $sql = "UPDATE usuario SET usuario = '$txtEditUsuario', idrol = $cbxEditRol, estado = $cbxEditEstado, idpregunta = $cbxEditPreguntaSeguridad, respuesta = '$txtEditRespuestaSecreta' WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
+
+    public function editarUsuarioMenosPreguntaSeguridad($idusuario, $txtEditNuevaContraseña, $txtEditUsuario, $cbxEditRol, $cbxEditEstado)
+    {
+        $sql = "UPDATE usuario SET contraseña = '$txtEditNuevaContraseña', usuario = '$txtEditUsuario', idrol = $cbxEditRol, estado = $cbxEditEstado WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
+
+    public function editarUsuarioMenosContraseñaMenosPreguntaSeguridad($idusuario, $txtEditUsuario, $cbxEditRol, $cbxEditEstado)
+    {
+        $sql = "UPDATE usuario SET usuario = '$txtEditUsuario', idrol = $cbxEditRol, estado = $cbxEditEstado WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
+
+    public function eliminarUsuario($idusuario)
+    {
+        $sql = "DELETE FROM usuario WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
 }
