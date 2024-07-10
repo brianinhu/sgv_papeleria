@@ -2,7 +2,7 @@
 require_once "controllerGestionUsuarios.php";
 require_once "../../compartido/mensajeSistema.php";
 $controller = new ControllerGestionUsuarios();
-$mensaje = new MensajeSistema();
+$mensaje = new MensajeVulnerabilidadSistema();
 
 if ($controller->validarSesion()) {
     if ($controller->validarBoton("btnCreateAgregar")) {
@@ -135,8 +135,8 @@ if ($controller->validarSesion()) {
             exit;
         }
     } else {
-        $mensaje->mensajeSistemaShow($controller->title, $controller->message);
+        $mensaje->mostrarMensaje($controller->title, $controller->message);
     }
 } else {
-    $mensaje->mensajeSistemaShow($controller->title, $controller->message);
+    $mensaje->mostrarMensaje($controller->title, $controller->message);
 }

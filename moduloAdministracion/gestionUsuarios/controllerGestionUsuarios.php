@@ -122,7 +122,7 @@ class ControllerGestionUsuarios
 
     public function validarUsuario($usuario) {
         $objUsuario = new Usuario();
-        if ($objUsuario->verificarUsuario($usuario)) {
+        if ($objUsuario->validarUsuario($usuario)) {
             $this->title = "Error";
             $this->message = "El usuario ya se encuentra registrado en el sistema. Por favor, cree otro usuario.";
             return false;

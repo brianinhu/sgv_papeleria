@@ -26,7 +26,7 @@ class ControllerRestablecimientoContraseña
     public function validarUsuario($usuario)
     {
         $objUsuario = new Usuario();
-        if ($objUsuario->verificarUsuario($usuario)) {
+        if ($objUsuario->validarUsuario($usuario)) {
             return true;
         } else {
             $this->message = "El usuario ingresado no existe. Intente nuevamente.";

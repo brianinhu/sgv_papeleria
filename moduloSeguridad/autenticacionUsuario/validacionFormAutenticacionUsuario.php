@@ -1,17 +1,19 @@
 <?php
 session_start();
+require_once "../../compartido/mensajeVulnerabilidadSistema.php";
 include_once("controllerAutenticacionUsuario.php");
 $controller = new ControllerAutenticacionUsuario();
+$mensaje = new MensajeVulnerabilidadSistema();
 if ($controller->validarBoton("btnIngresar")) {
     $response = array();
     $txtUsuario = $_POST['txtUsuario'];
-    $txtPassword = $_POST['txtPassword'];
+    $txtContraseña = $_POST['txtContraseña'];
     $txtRespuestaAntiRobot = $_POST['txtRespuestaAntiRobot'];
     if ($controller->validarTextoRespuestaAntiRobot($txtRespuestaAntiRobot)) {
         if ($controller->validarTextoUsuario($txtUsuario)) {
             if ($controller->validarUsuario($txtUsuario)) {
-                if ($controller->validarTextoContraseña($txtPassword)) {
-                    if ($controller->validarContraseña($txtUsuario, $txtPassword)) {
+                if ($controller->validarTextoContraseña($txtContraseña)) {
+                    if ($controller->validarContraseña($txtUsuario, $txtContraseña)) {
                         if ($controller->validarEstadoUsuario($txtUsuario)) {
                             $privilegios = $controller->obtenerPrivilegios($txtUsuario);
                             $rol = $controller->obtenerRol($txtUsuario);
@@ -21,19 +23,20 @@ if ($controller->validarBoton("btnIngresar")) {
                             $_SESSION['idusuario'] = $idusuario;
                             $_SESSION['privilegios'] = $privilegios;
                             $response['flag'] = 1;
-                            $response['redirect'] = "./moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php";
+                            $response['message'] = $controller->message;
+                            $response['redirect'] = "./moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php";
                             header('Content-Type: application/json');
                             echo json_encode($response);
                         } else {
                             $response['flag'] = 0;
-                            $response['message'] = "El usuario ingresado se encuentra inactivo. Comuníquese con el administrador.";
+                            $response['message'] = $controller->message;
                             header('Content-Type: application/json');
                             echo json_encode($response);
                             exit;
                         }
                     } else {
                         $response['flag'] = 0;
-                        $response['message'] = "La contraseña ingresada es incorrecta. Intente nuevamente.";
+                        $response['message'] = $controller->message;
                         header('Content-Type: application/json');
                         echo json_encode($response);
                         exit;
@@ -47,7 +50,7 @@ if ($controller->validarBoton("btnIngresar")) {
                 }
             } else {
                 $response['flag'] = 0;
-                $response['message'] = "El usuario ingresado no existe. Intente nuevamente.";
+                $response['message'] = $controller->message;
                 header('Content-Type: application/json');
                 echo json_encode($response);
                 exit;
@@ -67,7 +70,5 @@ if ($controller->validarBoton("btnIngresar")) {
         exit;
     }
 } else {
-    include_once("../../compartido/mensajeSistema.php");
-    $modal = new MensajeSistema();
-    $modal->mostrarMensajeSistema("Acceso denegado", "Se identificó un intento de vulnerabilidad del sistema.");
+    $mensaje->mostrarMensaje($controller->title, $controller->message);
 }

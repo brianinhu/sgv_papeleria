@@ -3,7 +3,7 @@ require_once("conexion.php");
 
 class Usuario extends Conexion
 {
-    public function verificarUsuario($usuario)
+    public function validarUsuario($usuario)
     {
         $sql = "SELECT * FROM usuario WHERE usuario = '$usuario'";
         $resultado = $this->conectar()->query($sql);
@@ -11,7 +11,7 @@ class Usuario extends Conexion
         return $resultado->num_rows > 0;
     }
 
-    public function verificarContraseña($usuario, $contraseña)
+    public function validarContraseña($usuario, $contraseña)
     {
         $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' AND contraseña = '$contraseña'";
         $resultado = $this->conectar()->query($sql);
@@ -19,7 +19,7 @@ class Usuario extends Conexion
         return $resultado->num_rows > 0;
     }
 
-    public function verificarEstadoUsuario($usuario)
+    public function validarEstadoUsuario($usuario)
     {
         $sql = "SELECT estado FROM usuario WHERE usuario = '$usuario'";
         $resultado = $this->conectar()->query($sql);
