@@ -29,7 +29,7 @@ if ($controller->validarBoton("btnAceptar")) {
         exit;
     }
 } else {
-    include_once("../../compartido/mensajeSistema.php");
+    include_once("../../compartido/mensajeVulnerabilidadSistema.php");
     $modal = new MensajeVulnerabilidadSistema();
     $modal->mostrarMensaje("Acceso denegado", "Se identificó un intento de vulnerabilidad del sistema.");
     exit;

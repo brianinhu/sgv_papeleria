@@ -104,7 +104,7 @@ class PanelGestionUsuarios
                 <button type="submit" name="btnAgregarUsuario" value="Agregar">Agregar usuario</button>
             </form>
 
-            <a href="../../moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php">Volver al menu principal</a>
+            <a href="../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php">Volver al menu principal</a>
 
             <!-- JavaScript JQuery -->
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>

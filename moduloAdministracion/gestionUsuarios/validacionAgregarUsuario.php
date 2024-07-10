@@ -1,6 +1,6 @@
 <?php
 require_once "controllerGestionUsuarios.php";
-require_once "../../compartido/mensajeSistema.php";
+require_once "../../compartido/mensajeVulnerabilidadSistema.php";
 $controller = new ControllerGestionUsuarios();
 $mensaje = new MensajeVulnerabilidadSistema();
 
@@ -33,7 +33,7 @@ if ($controller->validarSesion()) {
                                                         $response['flag'] = 1;
                                                         $response['title'] = $controller->title;
                                                         $response['message'] = $controller->message;
-                                                        $response['redirect'] = "validacionPostAgregarUsuario.php";
+                                                        $response['redirect'] = "validacionPostAccionesUsuario.php";
                                                         header('Content-Type: application/json');
                                                         echo json_encode($response);
                                                     } else {

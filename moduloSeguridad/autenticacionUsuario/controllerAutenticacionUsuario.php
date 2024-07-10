@@ -9,12 +9,13 @@ class ControllerAutenticacionUsuario
 
     public function validarBoton($nombreBoton)
     {
-        if (isset($_POST[$nombreBoton]) && ($_POST[$nombreBoton] == "Ingresar")) {
+        if (isset($_POST[$nombreBoton]) && $_POST[$nombreBoton] == "Ingresar") {
+            return true;
+        } else {
             $this->title = "Acceso denegado";
             $this->message = "Se identificó un intento de vulnerabilidad del sistema. Acceso denegado.";
             return false;
         }
-        return true;
     }
 
     public function validarTextoRespuestaAntiRobot($respuestaAntiRobot)

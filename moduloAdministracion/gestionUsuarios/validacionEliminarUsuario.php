@@ -1,6 +1,6 @@
 <?php
 require_once "controllerGestionUsuarios.php";
-require_once "../../compartido/mensajeSistema.php";
+require_once "../../compartido/mensajeVulnerabilidadSistema.php";
 
 $controller = new ControllerGestionUsuarios();
 $mensaje = new MensajeVulnerabilidadSistema();
