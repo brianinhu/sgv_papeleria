@@ -17,6 +17,9 @@ class formEmitirProforma
 
         <body>
             <div>
+                <a href="../../moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php">Volver al panel principal</a>
+            </div>
+            <div>
                 <p>Usuario conectado: <?php echo $_SESSION['usuario'] ?></p>
             </div>
             <form action="getProforma.php" method="POST">
@@ -41,7 +44,7 @@ class formEmitirProforma
                     </thead>
                     <tbody>
                         <?php
-                        if ($listaProductos !== NULL) {
+                        if (!empty($listaProductos)) {
                             $categoriasPorId = [];
                             foreach ($listaCategoria as $categoria) {
                                 $categoriasPorId[$categoria['idcategoria']] = $categoria['categoria'];

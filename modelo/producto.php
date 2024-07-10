@@ -9,10 +9,10 @@ class producto extends conexion
         $stmt = $conexion->prepare($sql);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        $productos = $resultado->fetch_all(MYSQLI_ASSOC);
+        $listaProductos = $resultado->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
         $this->desconectar();
-        return $productos;
+        return $listaProductos;
     }
 
     public function obtenerProductosBusqueda($txtBuscarProducto)
@@ -38,10 +38,10 @@ class producto extends conexion
         $stmt->bind_param($tipos, ...$parametros);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        $productos = $resultado->fetch_all(MYSQLI_ASSOC);
+        $listaProductos = $resultado->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
         $this->desconectar();
-        return $productos;
+        return $listaProductos;
     }
 
     public function obtenerDatosProducto($idProducto)
