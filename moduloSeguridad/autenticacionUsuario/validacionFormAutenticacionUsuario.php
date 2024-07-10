@@ -17,8 +17,10 @@ if ($controller->validarBoton("btnIngresar")) {
                         if ($controller->validarEstadoUsuario($txtUsuario)) {
                             $privilegios = $controller->obtenerPrivilegios($txtUsuario);
                             $rol = $controller->obtenerRol($txtUsuario);
+                            $idusuario = $controller->obtenerIdUsuario($txtUsuario);
                             $_SESSION['usuario'] = $txtUsuario;
                             $_SESSION['rol'] = $rol;
+                            $_SESSION['idusuario'] = $idusuario;
                             $_SESSION['privilegios'] = $privilegios;
                             $response['flag'] = 1;
                             $response['message'] = $controller->message;

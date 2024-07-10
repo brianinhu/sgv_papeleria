@@ -41,31 +41,38 @@ class formEmitirProforma
                     </thead>
                     <tbody>
                         <?php
-                        $categoriasPorId = [];
-                        foreach ($listaCategoria as $categoria) {
-                            $categoriasPorId[$categoria['idcategoria']] = $categoria['categoria'];
-                        }
+                        if ($listaProductos !== NULL) {
+                            $categoriasPorId = [];
+                            foreach ($listaCategoria as $categoria) {
+                                $categoriasPorId[$categoria['idcategoria']] = $categoria['categoria'];
+                            }
 
-                        foreach ($listaProductos as $producto) {
-                            $idProducto = $producto['idproducto'];
-                            $nombre = $producto['codigo'];
-                            $descripcion = $producto['nombre'];
-                            $categoriaId = $producto['idcategoria'];
-                            $precio = $producto['precio'];
-                            $stock = $producto['stock'];
-                            $nombreCategoria = isset($categoriasPorId[$categoriaId]) ? $categoriasPorId[$categoriaId] : 'null';
+                            foreach ($listaProductos as $producto) {
+                                $idProducto = $producto['idproducto'];
+                                $nombre = $producto['producto'];
+                                $descripcion = $producto['descripcion'];
+                                $categoriaId = $producto['idcategoria'];
+                                $precio = $producto['precio'];
+                                $stock = $producto['stock'];
+                                $nombreCategoria = isset($categoriasPorId[$categoriaId]) ? $categoriasPorId[$categoriaId] : 'null';
                         ?>
+                                <tr>
+                                    <td class="datosProducto"><?php echo $idProducto ?></td>
+                                    <td class="datosProducto"><?php echo $nombre; ?></td>
+                                    <td><?php echo $descripcion; ?></td>
+                                    <td><?php echo $nombreCategoria; ?></td>
+                                    <td class="datosProducto"><?php echo $precio; ?></td>
+                                    <td class="datosProducto"><?php echo $stock; ?></td>
+                                    <td><?php echo $stock == 0 ? 'Agotado' : 'Disponible'; ?></td>
+                                    <td>
+                                        <input type="button" class="btn <?php echo $stock == 0 ? 'btn-secondary' : 'btn-warning'; ?>" name="btnAgregarProducto" value="Agregar" <?php echo $stock == 0 ? 'disabled' : ''; ?>>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
+                        } else { ?>
                             <tr>
-                                <td class="datosProducto"><?php echo $idProducto ?></td>
-                                <td class="datosProducto"><?php echo $nombre; ?></td>
-                                <td><?php echo $descripcion; ?></td>
-                                <td><?php echo $nombreCategoria; ?></td>
-                                <td class="datosProducto"><?php echo $precio; ?></td>
-                                <td class="datosProducto"><?php echo $stock; ?></td>
-                                <td><?php echo $stock == 0 ? 'Agotado' : 'Disponible'; ?></td>
-                                <td>
-                                    <input type="button" class="btn <?php echo $stock == 0 ? 'btn-secondary' : 'btn-warning'; ?>" name="btnAgregarProducto" value="Agregar" <?php echo $stock == 0 ? 'disabled' : ''; ?>>
-                                </td>
+                                <td colspan='8'>No hay productos disponibles.</td>
                             </tr>
                         <?php
                         }
