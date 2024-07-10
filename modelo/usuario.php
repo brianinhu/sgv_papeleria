@@ -136,4 +136,14 @@ class Usuario extends Conexion
         $this->desconectar();
         return $resultado;
     }
+
+    // obtener id del usuario
+    public function obtenerIdUsuario($usuario)
+    {
+        $sql = "SELECT idusuario FROM usuario WHERE usuario = '$usuario'";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        $fila = $resultado->fetch_assoc();
+        return $fila['idusuario'];
+    }
 }

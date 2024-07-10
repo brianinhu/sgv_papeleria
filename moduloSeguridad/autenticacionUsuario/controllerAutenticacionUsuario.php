@@ -80,4 +80,10 @@ class ControllerAutenticacionUsuario
         $objUsuario = new Usuario();
         return $objUsuario->obtenerRol($usuario);
     }
+
+    public function obtenerIDUsuario($usuario)
+    {
+        $objUsuario = new Usuario();
+        return $objUsuario->obtenerIDUsuario($usuario);
+    }
 }
