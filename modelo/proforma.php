@@ -17,4 +17,13 @@ class proforma extends conexion
             return false;
         }
     }
+
+    public function listarProformas()
+    {
+        $sql = "SELECT * FROM proforma";
+        $conexion = $this->conectar();
+        $resultado = $conexion->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
 }
