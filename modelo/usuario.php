@@ -71,4 +71,69 @@ class Usuario extends Conexion
         $this->desconectar();
         return $resultado;
     }
+
+    public function obtenerUsuario($idusuario)
+    {
+        $sql = "SELECT * FROM usuario WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado->fetch_assoc();
+    }
+
+    public function validarDNI($DNI)
+    {
+        $sql = "SELECT * FROM usuario WHERE dni = '$DNI'";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado->num_rows > 0;
+    }
+
+    public function agregarUsuario($nombre, $aPaterno, $aMaterno, $DNI, $contraseña, $usuario, $rol, $estado, $pregunta, $respuesta)
+    {
+        $sql = "INSERT INTO usuario (nombre, apaterno, amaterno, dni, contraseña, usuario, idrol, estado, idpregunta, respuesta) 
+                VALUES ('$nombre', '$aPaterno', '$aMaterno', '$DNI', '$contraseña', '$usuario', $rol, $estado, $pregunta, '$respuesta')";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
+
+    public function editarUsuario($idusuario, $txtEditNuevaContraseña, $txtEditUsuario, $cbxEditRol, $cbxEditEstado, $cbxEditPreguntaSeguridad, $txtEditRespuestaSecreta)
+    {
+        $sql = "UPDATE usuario SET contraseña = '$txtEditNuevaContraseña', usuario = '$txtEditUsuario', idrol = $cbxEditRol, estado = $cbxEditEstado, idpregunta = $cbxEditPreguntaSeguridad, respuesta = '$txtEditRespuestaSecreta' WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
+
+    public function editarUsuarioMenosContraseña($idusuario, $txtEditUsuario, $cbxEditRol, $cbxEditEstado, $cbxEditPreguntaSeguridad, $txtEditRespuestaSecreta)
+    {
+        $sql = "UPDATE usuario SET usuario = '$txtEditUsuario', idrol = $cbxEditRol, estado = $cbxEditEstado, idpregunta = $cbxEditPreguntaSeguridad, respuesta = '$txtEditRespuestaSecreta' WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
+
+    public function editarUsuarioMenosPreguntaSeguridad($idusuario, $txtEditNuevaContraseña, $txtEditUsuario, $cbxEditRol, $cbxEditEstado)
+    {
+        $sql = "UPDATE usuario SET contraseña = '$txtEditNuevaContraseña', usuario = '$txtEditUsuario', idrol = $cbxEditRol, estado = $cbxEditEstado WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
+
+    public function editarUsuarioMenosContraseñaMenosPreguntaSeguridad($idusuario, $txtEditUsuario, $cbxEditRol, $cbxEditEstado)
+    {
+        $sql = "UPDATE usuario SET usuario = '$txtEditUsuario', idrol = $cbxEditRol, estado = $cbxEditEstado WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
+
+    public function eliminarUsuario($idusuario)
+    {
+        $sql = "DELETE FROM usuario WHERE idusuario = $idusuario";
+        $resultado = $this->conectar()->query($sql);
+        $this->desconectar();
+        return $resultado;
+    }
 }
