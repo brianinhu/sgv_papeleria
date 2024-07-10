@@ -13,7 +13,7 @@ $desc=array (
 );
 $up=-63;
 $ut=44;
-$ttffile='C:\xampp\htdocs\ProyectoADS\shared\tfpdf/font/unifont/DejaVuSans.ttf';
+$ttffile='C:\xampp\htdocs\sgv_papeleria\assets\tfpdf/font/unifont/DejaVuSans.ttf';
 $originalsize=757076;
 $fontkey='dejavuB';
 ?>
