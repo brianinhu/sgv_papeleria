@@ -16,6 +16,9 @@ class formRegistrarDespacho
 
         <body>
             <div>
+                <a href="../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php">Volver al panel principal</a>
+            </div>
+            <div>
                 <p>Usuario conectado: <?php echo $_SESSION['usuario'] ?></p>
             </div>
             <form action="getBoleta.php" method="POST">
@@ -38,7 +41,7 @@ class formRegistrarDespacho
                     </thead>
                     <tbody>
                         <?php
-                        if ($listaBoletas === NULL) {
+                        if (empty($listaBoletas)) {
                             echo "<tr><td colspan='6'>No hay boletas pendientes.</td></tr>";
                         } else {
                             foreach ($listaBoletas as $boleta) {

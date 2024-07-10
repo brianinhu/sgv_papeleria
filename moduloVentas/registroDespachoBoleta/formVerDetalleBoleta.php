@@ -5,7 +5,7 @@ class formVerDetalleBoleta
     {
         $idboleta = isset($detalleBoleta[0]['IDBoleta']) ? $detalleBoleta[0]['IDBoleta'] : '';
         $total = isset($detalleBoleta[0]['importe_total']) ? $detalleBoleta[0]['importe_total'] : '';
-        ?>
+?>
         <!DOCTYPE html>
         <html lang="en">
 
@@ -14,11 +14,13 @@ class formVerDetalleBoleta
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Detalles de boleta | Registrar despacho</title>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         </head>
 
         <body>
+            <div>
+                <a href="../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php">Volver al panel principal</a>
+            </div>
             <div>
                 <p>Usuario conectado: <?php echo $_SESSION['usuario'] ?></p>
             </div>
@@ -39,19 +41,20 @@ class formVerDetalleBoleta
                     <tbody>
                         <?php
                         foreach ($detalleBoleta as $detalle) {
+                            $idproducto = $detalle['idproducto'];
                             $nombre = $detalle['producto'];
                             $cantidad = $detalle['cantidad'];
                             $importe = $detalle['Importe'];
                             $igv = $detalle['IGV'];
-                            ?>
+                        ?>
                             <tr>
-                                <td><?php echo $idboleta; ?></td>
+                                <td><?php echo $idproducto; ?></td>
                                 <td><?php echo $nombre; ?></td>
                                 <td><?php echo $cantidad; ?></td>
                                 <td><?php echo $importe; ?></td>
                                 <td><?php echo $igv; ?></td>
                             </tr>
-                            <?php
+                        <?php
                         }
                         ?>
                     </tbody>
@@ -59,10 +62,6 @@ class formVerDetalleBoleta
                 <div>
                     <p>Total</p>
                     <input type="text" value="<?php echo $total ?>" readonly>
-                </div>
-                <div>
-                    <p>id Boleta</p>
-                    <input type="text" value="<?php echo $idboleta ?>" readonly>
                 </div>
                 <form action="getBoleta.php" method="POST">
                     <input type="hidden" name="idBoleta" value="<?php echo $idboleta; ?>">
@@ -75,6 +74,6 @@ class formVerDetalleBoleta
         </body>
 
         </html>
-        <?php
+<?php
     }
 } ?>
