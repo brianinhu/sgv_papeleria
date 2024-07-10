@@ -1,6 +1,9 @@
 <?php
 include_once "controlEmitirProforma.php";
 include_once "../compartidoModuloVentas/mensajeSistema.php";
+include_once "formEmitirProforma.php";
+include_once("../../modelo/producto.php");
+include_once("../../modelo/categoria.php");
 
 session_start();
 
@@ -61,12 +64,10 @@ if (validarBoton($btnEmitirProforma)) {
     if (verificarSesionIniciada()) {
         $objControlEmitirProforma = new controlEmitirProforma();
         $objControlEmitirProforma->listarProductosBD();
-
     } else {
         $objMensajeSistema = new mensajeSistema();
-        $objMensajeSistema->mensajeSistemaShow("Inicie sesión para continuar", "index.php", "systemOut");
+        $objMensajeSistema->mensajeSistemaShow("Autentique su usuario", "/sgv_papeleria/moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php", "systemOut");
     }
-
 } else if (validarBoton($btnBuscarProducto)) {
     $txtBuscarProducto = strtolower($_POST['txtBuscarProducto']);
 
@@ -74,24 +75,29 @@ if (validarBoton($btnEmitirProforma)) {
         if (!verificarCaracteresEspeciales($txtBuscarProducto)) {
             $objControlEmitirProforma = new controlEmitirProforma();
             $objControlEmitirProforma->listarBusquedaProductos($txtBuscarProducto);
-
         } else {
-            $objControlEmitirProforma = new controlEmitirProforma();
-            $objControlEmitirProforma->listarProductosBD();
+            $objProducto = new producto();
+            $listaProductos = $objProducto->listarProductos();
+            $objCategoria = new categoria();
+            $listaCategoria = $objCategoria->listarCategoria();
+            $objFormEmitirProforma = new formEmitirProforma();
+            $objFormEmitirProforma->formEmitirProformaShow($listaProductos, $listaCategoria);
 
             $objMensajeSistema = new mensajeSistema();
             $objMensajeSistema->mensajeSistemaShow("Se detectaron caracteres no válidos", "");
         }
-
     } else {
-        $objControlEmitirProforma = new controlEmitirProforma();
-        $objControlEmitirProforma->listarProductosBD();
+        $objProducto = new producto();
+        $listaProductos = $objProducto->listarProductos();
+        $objCategoria = new categoria();
+        $listaCategoria = $objCategoria->listarCategoria();
+        $objFormEmitirProforma = new formEmitirProforma();
+        $objFormEmitirProforma->formEmitirProformaShow($listaProductos, $listaCategoria);
 
         $objMensajeSistema = new mensajeSistema();
         $objMensajeSistema->mensajeSistemaShow("Ingrese id o nombre de producto válido", "");
     }
-
-} else if(validarBoton($btnGenerarProforma)){
+} else if (validarBoton($btnGenerarProforma)) {
     $idProductos = $_POST["idProducto"] ?? null;
 
     if (verificarExistenciaProductos($idProductos)) {
@@ -101,16 +107,18 @@ if (validarBoton($btnEmitirProforma)) {
         $listaProductos = crearListaProforma($idProductos, $cantidades, $subtotales);
         $objControlEmitirProforma = new controlEmitirProforma();
         $objControlEmitirProforma->emitirProforma($listaProductos, $totalProforma);
-
     } else {
-        $objControlEmitirProforma = new controlEmitirProforma();
-        $objControlEmitirProforma->listarProductosBD();
+        $objProducto = new producto();
+        $listaProductos = $objProducto->listarProductos();
+        $objCategoria = new categoria();
+        $listaCategoria = $objCategoria->listarCategoria();
+        $objFormEmitirProforma = new formEmitirProforma();
+        $objFormEmitirProforma->formEmitirProformaShow($listaProductos, $listaCategoria);
 
         $objMensajeSistema = new mensajeSistema();
         $objMensajeSistema->mensajeSistemaShow("No se ha agregado ningún producto", "");
     }
-
 } else {
     $objMensajeSistema = new mensajeSistema();
-    $objMensajeSistema->mensajeSistemaShow("Alto, acceso no permitido", "index.php", "systemOut");
+    $objMensajeSistema->mensajeSistemaShow("Acceso no permitido", "/sgv_papeleria/moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php", "systemOut");
 }

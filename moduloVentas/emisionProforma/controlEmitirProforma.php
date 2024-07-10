@@ -45,9 +45,9 @@ class controlEmitirProforma
             $respuesta = $objDetalleProforma->registrarDetalleProforma($idProforma, $idProducto, $cantidad, $subtotal);
         }
         if ($respuesta) {
-            $objMensajeSistema->mensajeSistemaShow("Proforma generada con éxito", "index.php", "systemOut", true);
+            $objMensajeSistema->mensajeSistemaShow("Proforma generada con éxito", "/moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php", "systemOut", true);
         } else {
-            $objMensajeSistema->mensajeSistemaShow("Oops! Parece que algo salió mal.", "index.php", "systemOut");
+            $objMensajeSistema->mensajeSistemaShow("Oops! Parece que algo salió mal.", "/moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php", "systemOut");
         }
     }
 }

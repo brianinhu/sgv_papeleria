@@ -12,8 +12,8 @@ class categoria extends conexion
             return NULL;
         else {
             for ($i = 0; $i < $filas; $i++)
-                $respuesta[$i] = mysqli_fetch_array($resultado);
-            return $respuesta;
+                $listaCategoria[$i] = mysqli_fetch_array($resultado);
+            return $listaCategoria;
         }
     }
 }
