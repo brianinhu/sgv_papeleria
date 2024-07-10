@@ -4,7 +4,7 @@ class Conexion
     private $host = "localhost";
     private $user = "root";
     private $password = "";
-    private $database = "papeleriaelangel_1";
+    private $database = "papeleria3";
     private $conexion;
 
     public function conectar()

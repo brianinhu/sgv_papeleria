@@ -12,7 +12,7 @@ function validarBoton($boton)
 
 function verificarSesionIniciada()
 {
-    return isset($_SESSION['idUsuario']);
+    return isset($_SESSION['usuario']);
 }
 
 function verificarCamposVacios($txtBuscarProducto)
