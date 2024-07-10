@@ -9,8 +9,8 @@ session_start();
 
 if ($controller -> validarSesion()) {
     if ($controller -> validarBoton("btnEmitirBoleta")) {
-        $listaBoletas = $controller->listarProformas();
-        $panelEmisionBoleta -> mostrarPanelEmisionBoleta($listaBoletas);
+        $listaProforma = $controller->listarProformas();
+        $panelEmisionBoleta -> mostrarPanelEmisionBoleta($listaProforma);
     } else {
         $mensajeSistema->mostrarMensaje("Error", "No se ha seleccionado la opción de emisión de boleta");
     }

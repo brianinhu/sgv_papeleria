@@ -2,13 +2,16 @@
 require_once "controllerGestionUsuarios.php";
 require_once "../../compartido/mensajeVulnerabilidadSistema.php";
 require_once "panelGestionUsuarios.php";
-$controller = new ControllerGestionUsuarios();
+$controller = new ControllerEmisionBoleta();
 $mensajeSistema = new MensajeVulnerabilidadSistema();
 $objPanelEmisionBoleta = new PanelEmisionBoleta();
 
+
+session_start();
 if ($controller->validarSesion()) {
-    $objPanelEmisionBoleta->mostrarPanelEmisionBoleta();
+    $lista = $controller->listarProformas();
+    $objPanelEmisionBoleta->mostrarPanelEmisionBoleta($lista);
 } else {
-    $mensajeSistema->mostrarMensaje($controller->title, $controller->message);
+    $mensajeSistema->mostrarMensaje("Error", "No se ha iniciado sesión");
     exit;
 }
