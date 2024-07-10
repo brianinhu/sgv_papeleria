@@ -6,7 +6,7 @@ if (isset($_SESSION['usuario'])) {
 }
 class FormAutenticacionUsuario
 {
-    public function mostrarForm()
+    public function mostrarFormulario()
     {
 ?>
         <!DOCTYPE html>
@@ -80,10 +80,10 @@ class FormAutenticacionUsuario
                     var btnIngresar = document.getElementById("btnIngresar").value;
                     $.ajax({
                         type: "POST",
-                        url: "./moduloSeguridad/autenticacionUsuario/validacionForm.php",
+                        url: "./moduloSeguridad/autenticacionUsuario/validacionFormAutenticacionUsuario.php",
                         data: {
                             txtUsuario: usuario,
-                            txtPassword: password,
+                            txtContraseña: password,
                             txtRespuestaAntiRobot: respuestaAntiRobot,
                             btnIngresar: btnIngresar
                         },
@@ -114,7 +114,6 @@ class FormAutenticacionUsuario
                             });
                         }
                     });
-
                 }
             </script>
 

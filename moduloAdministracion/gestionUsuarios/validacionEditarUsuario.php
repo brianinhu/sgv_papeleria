@@ -3,7 +3,7 @@ require_once "controllerGestionUsuarios.php";
 require_once "../../compartido/mensajeSistema.php";
 require_once "../../modelo/usuario.php";
 $controller = new ControllerGestionUsuarios();
-$mensaje = new MensajeSistema();
+$mensaje = new MensajeVulnerabilidadSistema();
 $usuario = new Usuario();
 
 if ($controller->validarSesion()) {
@@ -147,10 +147,10 @@ if ($controller->validarSesion()) {
             }
         }
     } else {
-        $mensaje->mostrarMensajeSistema($controller->title, $controller->message);
+        $mensaje->mostrarMensaje($controller->title, $controller->message);
         exit;
     }
 } else {
-    $mensaje->mostrarMensajeSistema($controller->title, $controller->message);
+    $mensaje->mostrarMensaje($controller->title, $controller->message);
     exit;
 }

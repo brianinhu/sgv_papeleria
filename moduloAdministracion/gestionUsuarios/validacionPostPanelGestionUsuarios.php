@@ -4,7 +4,7 @@ require_once "../../compartido/mensajeSistema.php";
 require_once "formAgregarUsuario.php";
 require_once "formEditarUsuario.php";
 $controller = new ControllerGestionUsuarios();
-$mensajeSistema = new MensajeSistema();
+$mensajeSistema = new MensajeVulnerabilidadSistema();
 $formAgregarUsuario = new FormAgregarUsuario();
 $formEditarUsuario = new FormEditarUsuario();
 if ($controller->validarSesion()) {
@@ -22,10 +22,10 @@ if ($controller->validarSesion()) {
         header("Location: validacionPostAccionesUsuario.php");
         exit;
     } else {
-        $mensajeSistema->mostrarMensajeSistema($controller->title, $controller->message);
+        $mensajeSistema->mostrarMensaje($controller->title, $controller->message);
         exit;
     }
 } else {
-    $mensajeSistema->mostrarMensajeSistema($controller->title, $controller->message);
+    $mensajeSistema->mostrarMensaje($controller->title, $controller->message);
     exit;
 }

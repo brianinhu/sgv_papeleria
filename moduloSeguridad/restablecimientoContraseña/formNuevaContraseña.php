@@ -1,9 +1,20 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) {
-    header('Location: ../../index.php');
+include_once("../../compartido/mensajeSistema.php");
+$modal = new MensajeVulnerabilidadSistema();
+function validarSesion()
+{
+    if (isset($_SESSION['usuario'])) {
+        return true;
+    }
+    return false;
+}
+
+if (!validarSesion()) {
+    $modal->mostrarMensaje("Acceso denegado", "Se identificó un intento de vulnerabilidad del sistema.");
     exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
