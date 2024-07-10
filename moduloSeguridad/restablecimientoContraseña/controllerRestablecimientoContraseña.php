@@ -57,7 +57,7 @@ class ControllerRestablecimientoContraseña
     public function validarRespuesta($usuario, $respuesta)
     {
         $objUsuario = new Usuario();
-        if ($objUsuario->verificarRespuesta($usuario, $respuesta)) {
+        if ($objUsuario->validarRespuesta($usuario, $respuesta)) {
             return true;
         } else {
             $this->message = "La respuesta ingresada es incorrecta. Intente nuevamente.";
@@ -92,7 +92,7 @@ class ControllerRestablecimientoContraseña
     public function restablecerContraseña($usuario, $txtNuevaContraseña)
     {
         $objUsuario = new Usuario();
-        $objUsuario->cambiarContraseña($usuario, $txtNuevaContraseña);
+        $objUsuario->restablecerContraseña($usuario, $txtNuevaContraseña);
         $this->message = "Su contraseña fue actualizada correctamente. Será redirigido al inicio de sesión en 3 segundos.";
     }
 }

@@ -1,6 +1,6 @@
 <?php
 require_once "controllerGestionUsuarios.php";
-require_once "../../compartido/mensajeSistema.php";
+require_once "../../compartido/mensajeVulnerabilidadSistema.php";
 require_once "formAgregarUsuario.php";
 require_once "formEditarUsuario.php";
 $controller = new ControllerGestionUsuarios();

@@ -13,10 +13,12 @@ class Usuario extends Conexion
 
     public function validarContraseña($usuario, $contraseña)
     {
-        $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' AND contraseña = '$contraseña'";
+        //verificar el hash de la contraseña
+        $sql = "SELECT contraseña FROM usuario WHERE usuario = '$usuario'";
         $resultado = $this->conectar()->query($sql);
         $this->desconectar();
-        return $resultado->num_rows > 0;
+        $fila = $resultado->fetch_assoc();
+        return password_verify($contraseña, $fila['contraseña']);
     }
 
     public function validarEstadoUsuario($usuario)
@@ -48,7 +50,7 @@ class Usuario extends Conexion
         return $fila['pregunta'];
     }
 
-    public function verificarRespuesta($usuario, $respuesta)
+    public function validarRespuesta($usuario, $respuesta)
     {
         $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' AND respuesta = '$respuesta'";
         $resultado = $this->conectar()->query($sql);
@@ -56,8 +58,10 @@ class Usuario extends Conexion
         return $resultado->num_rows > 0;
     }
 
-    public function cambiarContraseña($usuario, $contraseña)
+    public function restablecerContraseña($usuario, $contraseña)
     {
+        //hashear contraseña
+        $contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
         $sql = "UPDATE usuario SET contraseña = '$contraseña' WHERE usuario = '$usuario'";
         $resultado = $this->conectar()->query($sql);
         $this->desconectar();
@@ -90,6 +94,8 @@ class Usuario extends Conexion
 
     public function agregarUsuario($nombre, $aPaterno, $aMaterno, $DNI, $contraseña, $usuario, $rol, $estado, $pregunta, $respuesta)
     {
+        //hashear contraseña
+        $contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
         $sql = "INSERT INTO usuario (nombre, apaterno, amaterno, dni, contraseña, usuario, idrol, estado, idpregunta, respuesta) 
                 VALUES ('$nombre', '$aPaterno', '$aMaterno', '$DNI', '$contraseña', '$usuario', $rol, $estado, $pregunta, '$respuesta')";
         $resultado = $this->conectar()->query($sql);
@@ -99,6 +105,8 @@ class Usuario extends Conexion
 
     public function editarUsuario($idusuario, $txtEditNuevaContraseña, $txtEditUsuario, $cbxEditRol, $cbxEditEstado, $cbxEditPreguntaSeguridad, $txtEditRespuestaSecreta)
     {
+        //hashear contraseña
+        $txtEditNuevaContraseña = password_hash($txtEditNuevaContraseña, PASSWORD_DEFAULT);
         $sql = "UPDATE usuario SET contraseña = '$txtEditNuevaContraseña', usuario = '$txtEditUsuario', idrol = $cbxEditRol, estado = $cbxEditEstado, idpregunta = $cbxEditPreguntaSeguridad, respuesta = '$txtEditRespuestaSecreta' WHERE idusuario = $idusuario";
         $resultado = $this->conectar()->query($sql);
         $this->desconectar();
@@ -115,6 +123,8 @@ class Usuario extends Conexion
 
     public function editarUsuarioMenosPreguntaSeguridad($idusuario, $txtEditNuevaContraseña, $txtEditUsuario, $cbxEditRol, $cbxEditEstado)
     {
+        //hashear contraseña
+        $txtEditNuevaContraseña = password_hash($txtEditNuevaContraseña, PASSWORD_DEFAULT);
         $sql = "UPDATE usuario SET contraseña = '$txtEditNuevaContraseña', usuario = '$txtEditUsuario', idrol = $cbxEditRol, estado = $cbxEditEstado WHERE idusuario = $idusuario";
         $resultado = $this->conectar()->query($sql);
         $this->desconectar();
