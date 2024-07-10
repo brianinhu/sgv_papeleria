@@ -65,8 +65,8 @@ if (validarBoton($btnEmitirProforma)) {
         $objControlEmitirProforma = new controlEmitirProforma();
         $objControlEmitirProforma->listarProductosBD();
     } else {
-        $objMensajeSistema = new mensajeSistema();
-        $objMensajeSistema->mensajeSistemaShow("Autentique su usuario", "/sgv_papeleria/moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php", "systemOut");
+        header('Location: ../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php');
+        exit;
     }
 } else if (validarBoton($btnBuscarProducto)) {
     $txtBuscarProducto = strtolower($_POST['txtBuscarProducto']);
@@ -119,6 +119,6 @@ if (validarBoton($btnEmitirProforma)) {
         $objMensajeSistema->mensajeSistemaShow("No se ha agregado ningún producto", "");
     }
 } else {
-    $objMensajeSistema = new mensajeSistema();
-    $objMensajeSistema->mensajeSistemaShow("Acceso no permitido", "/sgv_papeleria/moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php", "systemOut");
+    header('Location: ../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php');
+    exit;
 }

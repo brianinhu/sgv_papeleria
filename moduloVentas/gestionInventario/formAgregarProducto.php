@@ -11,23 +11,25 @@ class formAgregarProducto
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Agregar producto</title>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         </head>
 
         <body>
             <div>
+                <a href="../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php">Volver al panel principal</a>
+            </div>
+            <div>
                 <p>Usuario conectado: <?php echo $_SESSION['usuario'] ?></p>
             </div>
             <div>
-                <form action="getProducto.php" method="POST">
+                <form action="getInventario.php" method="POST">
                     <div>
                         <p>Nombre Producto</p>
                         <input type="text" name="producto" value="">
                     </div>
                     <div>
                         <p>Descripción Producto</p>
-                        <input type="text" name="descripcion" value="">
+                        <textarea name="descripcion"></textarea>
                     </div>
                     <div>
                         <p>Precio Producto</p>
@@ -45,10 +47,10 @@ class formAgregarProducto
                             foreach ($listaCategoria as $categoria) {
                                 $idcategoria = $categoria['idcategoria'];
                                 $nom_categoria = $categoria['categoria'];
-                                ?>
+                            ?>
                                 <option value="<?php echo $idcategoria ?>"><?php echo $nom_categoria ?>
                                 </option>
-                                <?php
+                            <?php
                             } ?>
                         </select>
                     </div>
@@ -63,7 +65,7 @@ class formAgregarProducto
 
         </html>
 
-        <?php
+<?php
     }
 }
 ?>

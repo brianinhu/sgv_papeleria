@@ -12,12 +12,12 @@ class formEmitirProforma
             <title>Emisión de Proforma</title>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-            <link rel="stylesheet" href="../assets/css/emitirProforma.css">
+            <link rel="stylesheet" href="../../assets/css/emitirProforma.css">
         </head>
 
         <body>
             <div>
-                <a href="../../moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php">Volver al panel principal</a>
+                <a href="../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php">Volver al panel principal</a>
             </div>
             <div>
                 <p>Usuario conectado: <?php echo $_SESSION['usuario'] ?></p>
@@ -85,7 +85,7 @@ class formEmitirProforma
                 <input type="button" name="btnVisualizarLista" id="verListaProforma" value="Ver lista de productos" class="btn btn-primary">
             </div>
             <div class="resumenProforma">
-                <form action="../moduloVentas/getProforma.php" method="POST" class="formEmitirProforma">
+                <form action="getProforma.php" method="POST" class="formEmitirProforma">
                     <h2 class="subtitle">Lista de productos</h2>
                     <div>
                         <p style="text-align: left;">Productos seleccionados</p>
@@ -112,7 +112,7 @@ class formEmitirProforma
             </div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
-            <script src="../assets/js/emitirProforma.js"></script>
+            <script src="../../assets/js/emitirProforma.js"></script>
             <script>
                 $(document).ready(function() {
                     $('#verListaProforma').click(function() {
