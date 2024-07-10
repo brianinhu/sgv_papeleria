@@ -71,4 +71,5 @@ if ($controller->validarBoton("btnIngresar")) {
     }
 } else {
     $mensaje->mostrarMensaje($controller->title, $controller->message);
+    exit;
 }
