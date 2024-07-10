@@ -65,7 +65,7 @@ if (validarBoton($btnEmitirProforma)) {
         $objControlEmitirProforma = new controlEmitirProforma();
         $objControlEmitirProforma->listarProductosBD();
     } else {
-        header('../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php');
+        header('Location: ../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php');
         exit;
     }
 } else if (validarBoton($btnBuscarProducto)) {
@@ -119,6 +119,6 @@ if (validarBoton($btnEmitirProforma)) {
         $objMensajeSistema->mensajeSistemaShow("No se ha agregado ningún producto", "");
     }
 } else {
-    header('../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php');
+    header('Location: ../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php');
     exit;
 }

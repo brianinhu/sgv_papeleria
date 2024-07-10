@@ -34,7 +34,7 @@ class controlEmitirProforma
         date_default_timezone_set('America/Lima');
         $fecha = date("Y-m-d");
         $hora = date("H:i:s");
-        $idUsuario = $_SESSION["idUsuario"];
+        $idUsuario = $_SESSION["idusuario"];
         $objProforma = new proforma();
         $idProforma = $objProforma->insertarProforma($idUsuario, $fecha, $hora, $totalProforma);
         $objDetalleProforma = new detalle_proforma();
@@ -45,9 +45,9 @@ class controlEmitirProforma
             $respuesta = $objDetalleProforma->registrarDetalleProforma($idProforma, $idProducto, $cantidad, $subtotal);
         }
         if ($respuesta) {
-            $objMensajeSistema->mensajeSistemaShow("Proforma generada con éxito", "/moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php", "systemOut", true);
+            $objMensajeSistema->mensajeSistemaShow("Proforma generada con éxito", "../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php", "systemOut", true);
         } else {
-            $objMensajeSistema->mensajeSistemaShow("Oops! Parece que algo salió mal.", "/moduloSeguridad/autenticacionUsuario/prePanelPrincipal.php", "systemOut");
+            $objMensajeSistema->mensajeSistemaShow("Oops! Parece que algo salió mal.", "../../moduloSeguridad/autenticacionUsuario/prePanelPrincipalUsuario.php", "systemOut");
         }
     }
 }

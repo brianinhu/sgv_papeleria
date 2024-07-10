@@ -6,15 +6,9 @@ class controlRegistrarDespacho
         include_once("../modelos/boleta.php");
         $objBoleta = new boleta();
         $listaBoletas = $objBoleta->listarBoletas();
-        if ($listaBoletas === null) {
-            include_once ("../shared/mensajeSistema.php");
-            $objMensajeSistema = new mensajeSistema();
-            $objMensajeSistema->mensajeSistemaShow("No hay boletas pendientes", "");
-        } else {
-            include_once("../moduloVentas/formRegistrarDespacho.php");
-            $objFormRegistrarDespacho = new formRegistrarDespacho();
-            $objFormRegistrarDespacho->formRegistrarDespachoShow($listaBoletas);
-        }
+        include_once("../moduloVentas/formRegistrarDespacho.php");
+        $objFormRegistrarDespacho = new formRegistrarDespacho();
+        $objFormRegistrarDespacho->formRegistrarDespachoShow($listaBoletas);
     }
 
     public function listarBoletasBusqueda($txtBuscarBoleta)
