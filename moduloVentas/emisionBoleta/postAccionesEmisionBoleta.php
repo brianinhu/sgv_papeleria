@@ -1,7 +1,7 @@
 <?php
-require_once "controllerGestionUsuarios.php";
+require_once "controllerEmisionBoleta.php";
 require_once "../../compartido/mensajeVulnerabilidadSistema.php";
-require_once "panelGestionUsuarios.php";
+require_once "panelEmisionBoleta.php";
 $controller = new ControllerEmisionBoleta();
 $mensajeSistema = new MensajeVulnerabilidadSistema();
 $objPanelEmisionBoleta = new PanelEmisionBoleta();
